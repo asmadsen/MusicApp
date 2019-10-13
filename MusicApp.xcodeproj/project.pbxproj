@@ -10,7 +10,7 @@
 		0F273206234F703500D1A523 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F273205234F703500D1A523 /* AppDelegate.swift */; };
 		0F273208234F703500D1A523 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F273207234F703500D1A523 /* SceneDelegate.swift */; };
 		0F27320B234F703500D1A523 /* MusicApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0F273209234F703500D1A523 /* MusicApp.xcdatamodeld */; };
-		0F27320D234F703500D1A523 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F27320C234F703500D1A523 /* ContentView.swift */; };
+		0F27320D234F703500D1A523 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F27320C234F703500D1A523 /* App.swift */; };
 		0F27320F234F703600D1A523 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F27320E234F703600D1A523 /* Assets.xcassets */; };
 		0F273212234F703600D1A523 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F273211234F703600D1A523 /* Preview Assets.xcassets */; };
 		0F273215234F703600D1A523 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F273213234F703600D1A523 /* LaunchScreen.storyboard */; };
@@ -27,10 +27,8 @@
 		0F273259234F788000D1A523 /* MostLovedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F273258234F788000D1A523 /* MostLovedResponse.swift */; };
 		0F27325B234F79EB00D1A523 /* AlbumList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F27325A234F79EB00D1A523 /* AlbumList.swift */; };
 		0F27325D234F86A400D1A523 /* AlbumListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F27325C234F86A400D1A523 /* AlbumListRow.swift */; };
-		0F273260234F878D00D1A523 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 0F27325F234F878D00D1A523 /* URLImage */; };
 		0F273262234F88ED00D1A523 /* AlbumGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F273261234F88ED00D1A523 /* AlbumGrid.swift */; };
 		0F273267234F8B2400D1A523 /* AlbumGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F273266234F8B2400D1A523 /* AlbumGridItem.swift */; };
-		0F27326D234FAEA700D1A523 /* QGrid in Frameworks */ = {isa = PBXBuildFile; productRef = 0F27326C234FAEA700D1A523 /* QGrid */; };
 		0F273270234FC92100D1A523 /* GridStack in Frameworks */ = {isa = PBXBuildFile; productRef = 0F27326F234FC92100D1A523 /* GridStack */; };
 		0F273274235080AF00D1A523 /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F273273235080AF00D1A523 /* Favorites.swift */; };
 		0F2732762350823500D1A523 /* TrackRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2732752350823500D1A523 /* TrackRow.swift */; };
@@ -40,6 +38,12 @@
 		0F27327E23508ED500D1A523 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F27327D23508ED500D1A523 /* Artist.swift */; };
 		0F27328023508F2B00D1A523 /* TasteDiveResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F27327F23508F2B00D1A523 /* TasteDiveResponse.swift */; };
 		0F27328223508FC900D1A523 /* tastedive.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F27328123508FC900D1A523 /* tastedive.json */; };
+		0F27328923511D4C00D1A523 /* SwURL in Frameworks */ = {isa = PBXBuildFile; productRef = 0F27328823511D4C00D1A523 /* SwURL */; };
+		0F27328D2351276D00D1A523 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F27328C2351276D00D1A523 /* AppViewModel.swift */; };
+		0F27328F2351F73000D1A523 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F27328E2351F73000D1A523 /* ActivityIndicator.swift */; };
+		0F2732912352034900D1A523 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2732902352034900D1A523 /* SearchResponse.swift */; };
+		0F2732932352179B00D1A523 /* URLImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2732922352179B00D1A523 /* URLImage.swift */; };
+		0F27329523521FBA00D1A523 /* FavoriteTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F27329423521FBA00D1A523 /* FavoriteTrack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,7 +68,7 @@
 		0F273205234F703500D1A523 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0F273207234F703500D1A523 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		0F27320A234F703500D1A523 /* MusicApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MusicApp.xcdatamodel; sourceTree = "<group>"; };
-		0F27320C234F703500D1A523 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		0F27320C234F703500D1A523 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		0F27320E234F703600D1A523 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0F273211234F703600D1A523 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0F273216234F703600D1A523 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -99,6 +103,11 @@
 		0F27327D23508ED500D1A523 /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		0F27327F23508F2B00D1A523 /* TasteDiveResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasteDiveResponse.swift; sourceTree = "<group>"; };
 		0F27328123508FC900D1A523 /* tastedive.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = tastedive.json; sourceTree = "<group>"; };
+		0F27328C2351276D00D1A523 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
+		0F27328E2351F73000D1A523 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		0F2732902352034900D1A523 /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
+		0F2732922352179B00D1A523 /* URLImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLImage.swift; sourceTree = "<group>"; };
+		0F27329423521FBA00D1A523 /* FavoriteTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTrack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,9 +115,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F27326D234FAEA700D1A523 /* QGrid in Frameworks */,
+				0F27328923511D4C00D1A523 /* SwURL in Frameworks */,
 				0F273270234FC92100D1A523 /* GridStack in Frameworks */,
-				0F273260234F878D00D1A523 /* URLImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,7 +167,8 @@
 				0F273239234F709300D1A523 /* Screens */,
 				0F273205234F703500D1A523 /* AppDelegate.swift */,
 				0F273207234F703500D1A523 /* SceneDelegate.swift */,
-				0F27320C234F703500D1A523 /* ContentView.swift */,
+				0F27320C234F703500D1A523 /* App.swift */,
+				0F27328C2351276D00D1A523 /* AppViewModel.swift */,
 				0F27320E234F703600D1A523 /* Assets.xcassets */,
 				0F273213234F703600D1A523 /* LaunchScreen.storyboard */,
 				0F273216234F703600D1A523 /* Info.plist */,
@@ -206,6 +215,8 @@
 				0F273261234F88ED00D1A523 /* AlbumGrid.swift */,
 				0F273266234F8B2400D1A523 /* AlbumGridItem.swift */,
 				0F2732752350823500D1A523 /* TrackRow.swift */,
+				0F27328E2351F73000D1A523 /* ActivityIndicator.swift */,
+				0F2732922352179B00D1A523 /* URLImage.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -227,6 +238,7 @@
 				0F27324F234F76DA00D1A523 /* Album.swift */,
 				0F2732772350859500D1A523 /* Track.swift */,
 				0F27327D23508ED500D1A523 /* Artist.swift */,
+				0F27329423521FBA00D1A523 /* FavoriteTrack.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -255,6 +267,7 @@
 				0F273258234F788000D1A523 /* MostLovedResponse.swift */,
 				0F273279235085D700D1A523 /* TracksResponse.swift */,
 				0F27327F23508F2B00D1A523 /* TasteDiveResponse.swift */,
+				0F2732902352034900D1A523 /* SearchResponse.swift */,
 			);
 			path = ResposeTypes;
 			sourceTree = "<group>";
@@ -276,9 +289,8 @@
 			);
 			name = MusicApp;
 			packageProductDependencies = (
-				0F27325F234F878D00D1A523 /* URLImage */,
-				0F27326C234FAEA700D1A523 /* QGrid */,
 				0F27326F234FC92100D1A523 /* GridStack */,
+				0F27328823511D4C00D1A523 /* SwURL */,
 			);
 			productName = MusicApp;
 			productReference = 0F273202234F703500D1A523 /* MusicApp.app */;
@@ -353,9 +365,8 @@
 			);
 			mainGroup = 0F2731F9234F703500D1A523;
 			packageReferences = (
-				0F27325E234F878D00D1A523 /* XCRemoteSwiftPackageReference "url-image" */,
-				0F27326B234FAEA700D1A523 /* XCRemoteSwiftPackageReference "QGrid" */,
 				0F27326E234FC92100D1A523 /* XCRemoteSwiftPackageReference "GridStack" */,
+				0F27328723511D4C00D1A523 /* XCRemoteSwiftPackageReference "SwURL" */,
 			);
 			productRefGroup = 0F273203234F703500D1A523 /* Products */;
 			projectDirPath = "";
@@ -412,9 +423,13 @@
 				0F273206234F703500D1A523 /* AppDelegate.swift in Sources */,
 				0F273208234F703500D1A523 /* SceneDelegate.swift in Sources */,
 				0F2732762350823500D1A523 /* TrackRow.swift in Sources */,
-				0F27320D234F703500D1A523 /* ContentView.swift in Sources */,
+				0F2732932352179B00D1A523 /* URLImage.swift in Sources */,
+				0F27328D2351276D00D1A523 /* AppViewModel.swift in Sources */,
+				0F27329523521FBA00D1A523 /* FavoriteTrack.swift in Sources */,
+				0F27320D234F703500D1A523 /* App.swift in Sources */,
 				0F27327A235085D700D1A523 /* TracksResponse.swift in Sources */,
 				0F27323F234F710900D1A523 /* AlbumDetails.swift in Sources */,
+				0F27328F2351F73000D1A523 /* ActivityIndicator.swift in Sources */,
 				0F27323D234F70F200D1A523 /* Search.swift in Sources */,
 				0F273252234F772F00D1A523 /* PreviewData.swift in Sources */,
 				0F27328023508F2B00D1A523 /* TasteDiveResponse.swift in Sources */,
@@ -424,6 +439,7 @@
 				0F273267234F8B2400D1A523 /* AlbumGridItem.swift in Sources */,
 				0F27323B234F70E600D1A523 /* TopAlbums.swift in Sources */,
 				0F273262234F88ED00D1A523 /* AlbumGrid.swift in Sources */,
+				0F2732912352034900D1A523 /* SearchResponse.swift in Sources */,
 				0F273250234F76DA00D1A523 /* Album.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -772,22 +788,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		0F27325E234F878D00D1A523 /* XCRemoteSwiftPackageReference "url-image" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/dmytro-anokhin/url-image.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.9.0;
-			};
-		};
-		0F27326B234FAEA700D1A523 /* XCRemoteSwiftPackageReference "QGrid" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Q-Mobile/QGrid";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.2;
-			};
-		};
 		0F27326E234FC92100D1A523 /* XCRemoteSwiftPackageReference "GridStack" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pietropizzi/GridStack";
@@ -796,23 +796,26 @@
 				minimumVersion = 0.2.5;
 			};
 		};
+		0F27328723511D4C00D1A523 /* XCRemoteSwiftPackageReference "SwURL" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/cmtrounce/SwURL";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0F27325F234F878D00D1A523 /* URLImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0F27325E234F878D00D1A523 /* XCRemoteSwiftPackageReference "url-image" */;
-			productName = URLImage;
-		};
-		0F27326C234FAEA700D1A523 /* QGrid */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0F27326B234FAEA700D1A523 /* XCRemoteSwiftPackageReference "QGrid" */;
-			productName = QGrid;
-		};
 		0F27326F234FC92100D1A523 /* GridStack */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0F27326E234FC92100D1A523 /* XCRemoteSwiftPackageReference "GridStack" */;
 			productName = GridStack;
+		};
+		0F27328823511D4C00D1A523 /* SwURL */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0F27328723511D4C00D1A523 /* XCRemoteSwiftPackageReference "SwURL" */;
+			productName = SwURL;
 		};
 /* End XCSwiftPackageProductDependency section */
 

@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import URLImage
+import SwURL
 
 struct AlbumListRow: View {
     var album: Album
@@ -18,12 +18,10 @@ struct AlbumListRow: View {
     
     var body: some View {
         HStack {
-            URLImage(URL(string: album.strAlbumThumb)!, placeholder: Image("albumcover-placeholder").resizable()) { proxy in
-                proxy.image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .clipped()
-            }
+            URLImage(url: album.strAlbumThumb, placeholder: Image("albumcover-placeholder"))
+            .scaledToFit()
+            .aspectRatio(contentMode: .fit)
+            .clipped()
             .frame(width: 75.0, height: 75.0)
             VStack(alignment: .leading) {
                 Text(album.strAlbum)

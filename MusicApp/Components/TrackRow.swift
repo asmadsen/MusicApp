@@ -10,7 +10,7 @@ import SwiftUI
 
 struct TrackRow: View {
     var track: Track
-    var isInFavorites : Bool
+    var isInFavorites: Bool
     var showArtist: Bool
     
     var duration: String {
@@ -19,19 +19,20 @@ struct TrackRow: View {
             let formatter = DateComponentsFormatter()
             formatter.allowedUnits = [.minute, .second]
             formatter.unitsStyle = .positional
-
+            
             let formattedString = formatter.string(from: TimeInterval(interval!/1000))!
             return formattedString
         }
     }
     
-    init(_ track: Track, isInFavorites: Bool, showArtist: Bool = false) {
+    init(_ track: Track, isInFavorites : Bool = false, showArtist: Bool = false) {
         self.track = track
         self.isInFavorites = isInFavorites
         self.showArtist = showArtist
     }
     
     var body: some View {
+       
         HStack {
             Image(systemName: isInFavorites ? "star.fill" : "star")
                 .foregroundColor(isInFavorites ? .yellow : .none)

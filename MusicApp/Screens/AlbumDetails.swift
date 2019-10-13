@@ -7,10 +7,18 @@
 //
 
 import SwiftUI
-import URLImage
+import SwURL
+import Combine
 
 struct AlbumDetails: View {
     var album: Album
+    @EnvironmentObject var viewModel: AppViewModel
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(fetchRequest: FavoriteTrack.getAllFavoriteTracks()) var favoriteTracks: FetchedResults<FavoriteTrack>
+    
+    var tracks: [Track] {
+        viewModel.tracks[album.idAlbum] ?? []
+    }
     
     init(_ album: Album) {
         self.album = album
@@ -19,13 +27,9 @@ struct AlbumDetails: View {
     var body: some View {
         List() {
             VStack(alignment: .leading) {
-                URLImage(URL(string: self.album.strAlbumThumb)!, placeholder: Image("albumcover-placeholder")) { proxy in
-                    proxy.image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                    
-                }
-                .frame(maxWidth: .infinity)
+                URLImage(url: album.strAlbumThumb, placeholder: Image("albumcover-placeholder"))
+                    .aspectRatio(contentMode: .fill)
+                    .frame(maxWidth: .infinity)
                 HStack() {
                     Text(self.album.strAlbum)
                         .font(.title)
@@ -39,14 +43,39 @@ struct AlbumDetails: View {
                     .padding()
                 
             }
-                .listRowInsets(EdgeInsets())
+            .listRowInsets(EdgeInsets())
             Section(header: Text("Tracks")) {
-                ForEach(previewTracks.track, id: \.idTrack) { track in
-                    TrackRow(track, isInFavorites: false)
+                ForEach(tracks, id: \.idTrack) { track in
+                    Button(action: { self.toggleAsFavorite(track) }) {
+                        TrackRow(track, isInFavorites: self.trackIsFavorite(track))
+                    }
                 }
             }
         }
         .navigationBarTitle(Text(album.strAlbum), displayMode: .inline)
+        .onAppear {
+            self.viewModel.loadTracks(self.album.idAlbum)
+        }
+    }
+    
+    func toggleAsFavorite(_ track: Track) {
+        let entry = favoriteTracks.first(where: { $0.idTrack == track.idTrack })
+        if let entry = entry {
+            self.managedObjectContext.delete(entry)
+        } else {
+            do {
+                let item = FavoriteTrack(context: self.managedObjectContext)
+                item.from(track: track)
+                item.displayOrder = favoriteTracks.count
+                try self.managedObjectContext.save()
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    func trackIsFavorite(_ track: Track) -> Bool {
+        return favoriteTracks.contains(where: { $0.idTrack == track.idTrack })
     }
 }
 
@@ -56,6 +85,12 @@ struct AlbumDetails_Previews: PreviewProvider {
             NavigationView {
                 AlbumDetails(previewMostLovedAlbums.loved[0])
             }
+            .environmentObject(AppViewModel(tracks: [previewMostLovedAlbums.loved[0].idAlbum: previewTracks.track]))
+            NavigationView {
+                AlbumDetails(previewMostLovedAlbums.loved[0])
+            }
+            .environmentObject(AppViewModel(isLoadingTracks: true))
         }
+        
     }
 }

@@ -14,43 +14,43 @@ enum PresentationMode{
 }
 
 struct TopAlbums: View {
-    var albums: [Album]
+    @EnvironmentObject var viewModel: AppViewModel
     @Binding var presentation: PresentationMode
     
     var body: some View {
         NavigationView {
-        ZStack {
-            if (self.presentation == .Grid) {
-                AlbumList(albums: albums) { album in
-                    AlbumDetails(album)
-                }
-            } else {
-                AlbumGrid(albums: albums) { album in
-                    AlbumDetails(album)
+            ZStack {
+                if (self.presentation == .List) {
+                    AlbumList(albums: viewModel.mostLovedAlbums) { album in
+                        AlbumDetails(album)
+                    }
+                } else {
+                    AlbumGrid(albums: viewModel.mostLovedAlbums) { album in
+                        AlbumDetails(album)
+                    }
                 }
             }
+            .navigationBarTitle("Albums")
+            .navigationBarItems(trailing: Picker("Display mode", selection: self.$presentation) {
+                Image(systemName: "square.grid.3x2")
+                    .tag(PresentationMode.Grid)
+                Image(systemName: "text.justify")
+                    .tag(PresentationMode.List)
+            }
+            .pickerStyle(SegmentedPickerStyle()))
         }
-        .navigationBarTitle("Albums")
-        .navigationBarItems(trailing: Picker("Display mode", selection: self.$presentation) {
-            Image(systemName: "square.grid.3x2")
-                .tag(PresentationMode.Grid)
-            Image(systemName: "text.justify")
-                .tag(PresentationMode.List)
-        }
-        .pickerStyle(SegmentedPickerStyle()))
-        }
-        
+        .onAppear(perform: {
+            self.viewModel.loadMostLovedAlbums()
+        })
     }
 }
 
 struct TopAlbums_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-                TopAlbums(albums: previewMostLovedAlbums.loved, presentation: .constant(.Grid))
-            
-            
-                TopAlbums(albums: previewMostLovedAlbums.loved, presentation: .constant(.List))
-            
+            TopAlbums(presentation: .constant(.Grid))
+            TopAlbums(presentation: .constant(.List))
         }
+        .environmentObject(AppViewModel(mostLovedAlbums: previewMostLovedAlbums.loved))
     }
 }

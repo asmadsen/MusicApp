@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import URLImage
+import SwURL
 
 struct AlbumGridItem: View {
     var album: Album
@@ -20,14 +20,11 @@ struct AlbumGridItem: View {
     
     var body: some View {
         VStack {
-            URLImage(URL(string: album.strAlbumThumb)!, placeholder: Image("albumcover-placeholder").resizable()) { proxy in
-                proxy.image
-                    .resizable()
-                    .scaledToFit()
-                    .aspectRatio(contentMode: .fit)
-                    .clipped()
-            }
-                .frame(width: self.itemWidth, height: self.itemWidth)
+            URLImage(url: album.strAlbumThumb, placeholder: Image("albumcover-placeholder"))
+            .scaledToFit()
+            .aspectRatio(contentMode: .fit)
+            .clipped()
+            .frame(width: self.itemWidth, height: self.itemWidth)
             Text(album.strAlbum)
                 .font(.headline)
                 .lineLimit(1)
