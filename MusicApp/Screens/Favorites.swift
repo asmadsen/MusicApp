@@ -12,28 +12,37 @@ struct Favorites: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(fetchRequest: FavoriteTrack.getAllFavoriteTracks()) var favoriteTracks: FetchedResults<FavoriteTrack>
     @EnvironmentObject var viewModel: AppViewModel
-    
+
     var body: some View {
         NavigationView {
             VStack(alignment: .leading) {
-                List{
+                List {
                     ForEach(favoriteTracks, id: \.idTrack) { track in
                         TrackRow(track.toTrack(), isInFavorites: true, showArtist: true)
                     }
-                    .onMove(perform: move)
-                    .onDelete(perform: delete)
+                            .onMove(perform: move)
+                            .onDelete(perform: delete)
                 }
-                .navigationBarItems(trailing: EditButton())
+                        .navigationBarItems(trailing: EditButton())
                 Text("Recommended Artists")
-                    .font(.title)
-                    .padding(.horizontal)
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(alignment: .top, spacing: 10.0) {
-                        ForEach(viewModel.recommendedArtists, id: \.Name) { artist in
-                            Text(artist.Name)
-                                .padding()
-                                .background(Color.blue)
+                        .font(.title)
+                        .padding(.horizontal)
+                VStack {
+                    if (!viewModel.recommendedArtists.isEmpty) {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(alignment: .top, spacing: 10.0) {
+                                ForEach(viewModel.recommendedArtists, id: \.Name) { artist in
+                                    Text(artist.Name)
+                                            .padding()
+                                            .background(Color.blue)
+                                }
+                            }
                         }
+                    } else {
+                        Text("Add some favorite tracks")
+                            .frame(minWidth: 0, maxWidth: .infinity)
+                            .padding()
+                            .background(Color.blue)
                     }
                 }
                 .onAppear(perform: {
@@ -42,13 +51,15 @@ struct Favorites: View {
                 .padding(.horizontal)
                 .padding(.bottom)
             }
-            .navigationBarTitle("Favorites")
-            
+                    .navigationBarTitle("Favorites")
+
         }
     }
-    
+
     func move(from source: IndexSet, to destination: Int) {
-        guard let sourcePos: Int = source.first else { return }
+        guard let sourcePos: Int = source.first else {
+            return
+        }
         let lower = min(sourcePos, destination)
         let higher = max(sourcePos, destination)
         var tmpArray = Array(self.favoriteTracks)
@@ -74,19 +85,20 @@ struct Favorites: View {
             }
         }
     }
-    
+
     func delete(at indicies: IndexSet) {
         indicies.forEach { index in
             managedObjectContext.delete(favoriteTracks[index])
         }
+        do {
+            try managedObjectContext.save()
+        } catch  {}
+        self.viewModel.loadRecommendedArtists(by: Array(self.favoriteTracks))
     }
 }
 
 struct Favorites_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            Favorites()
-            
-        }
+        Text("Preview won't work because it uses managedObjectContext")
     }
 }

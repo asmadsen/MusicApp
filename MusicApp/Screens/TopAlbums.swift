@@ -20,14 +20,18 @@ struct TopAlbums: View {
     var body: some View {
         NavigationView {
             ZStack {
-                if (self.presentation == .List) {
-                    AlbumList(albums: viewModel.mostLovedAlbums) { album in
-                        AlbumDetails(album)
+                if (!self.viewModel.mostLovedAlbums.isEmpty) {
+                    if (self.presentation == .List) {
+                        AlbumList(albums: viewModel.mostLovedAlbums) { album in
+                            AlbumDetails(album)
+                        }
+                    } else {
+                        AlbumGrid(albums: viewModel.mostLovedAlbums) { album in
+                            AlbumDetails(album)
+                        }
                     }
                 } else {
-                    AlbumGrid(albums: viewModel.mostLovedAlbums) { album in
-                        AlbumDetails(album)
-                    }
+                    ActivityIndicator(.large)
                 }
             }
             .navigationBarTitle("Albums")

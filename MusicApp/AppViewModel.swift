@@ -15,6 +15,7 @@ final class AppViewModel: ObservableObject {
     @Published private(set) var mostLovedAlbums =  [Album]()
     @Published private(set) var tracks = Dictionary<String, [Track]>()
     @Published private(set) var isLoadingTracks = false
+    @Published private(set) var isSearching = false
     
     convenience init(mostLovedAlbums: [Album]) {
         self.init()
@@ -45,7 +46,9 @@ final class AppViewModel: ObservableObject {
     private var tracksCancellable: AnyCancellable? {
         didSet { oldValue?.cancel() }
     }
-    
+    private var recommendedCancellable: AnyCancellable? {
+        didSet { oldValue?.cancel() }
+    }
     private(set) var searchQueryCancellable: AnyCancellable? {
         didSet { oldValue?.cancel() }
     }
@@ -75,9 +78,6 @@ final class AppViewModel: ObservableObject {
             .map { $0.data }
             .decode(type: TracksResponse.self, decoder: JSONDecoder())
             .map { $0.track }
-            .mapError { error in
-                error
-            }
             .replaceError(with: [])
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { (result) in
@@ -87,14 +87,15 @@ final class AppViewModel: ObservableObject {
             })
     }
     
-    func search() {
-        guard !searchQuery.isEmpty else {
+    func search(_ query: String) {
+        guard !query.isEmpty else {
             return searchResult = []
         }
+        self.isSearching = true
 
         var urlComponents = URLComponents(string: "https://theaudiodb.com/api/v1/json/1/searchalbum.php")!
         urlComponents.queryItems = [
-            URLQueryItem(name: "s", value: searchQuery)
+            URLQueryItem(name: "s", value: query)
         ]
 
         var request = URLRequest(url: urlComponents.url!)
@@ -106,15 +107,20 @@ final class AppViewModel: ObservableObject {
             .map { $0.album ?? [] }
             .replaceError(with: [])
             .receive(on: RunLoop.main)
-            .assign(to: \.searchResult, on: self)
+            .sink(receiveValue: { result in
+                self.searchResult = result
+                self.isSearching = false
+            })
     }
     
     func startSearchListening() {
         searchQueryCancellable = $searchQuery
+            .removeDuplicates()
+            .filter({ !$0.isEmpty })
             .debounce(for: .milliseconds(250), scheduler: RunLoop.main)
             .sink { query in
-                self.search()
-        }
+                self.search(query)
+            }
     }
     
     @Published private(set) var recommendedArtists = [SingleResult]()
@@ -130,13 +136,13 @@ final class AppViewModel: ObservableObject {
         var urlComponents = URLComponents(string: "https://tastedive.com/api/similar")!
         urlComponents.queryItems = [
             URLQueryItem(name: "q", value: artistsSet.joined(separator: ",")),
-            URLQueryItem(name: "k", value: "------API-TOKEN-------"),
+            URLQueryItem(name: "k", value: "347870-MusicApp-XI50S0HA"),
         ]
 
         var request = URLRequest(url: urlComponents.url!)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        searchCancellable = URLSession.shared.dataTaskPublisher(for: request)
+        recommendedCancellable = URLSession.shared.dataTaskPublisher(for: request)
             .map { $0.data }
             .decode(type: TasteDiveResponse.self, decoder: JSONDecoder())
             .map { $0.Similar.Results }

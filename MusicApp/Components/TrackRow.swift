@@ -32,7 +32,6 @@ struct TrackRow: View {
     }
     
     var body: some View {
-       
         HStack {
             Image(systemName: isInFavorites ? "star.fill" : "star")
                 .foregroundColor(isInFavorites ? .yellow : .none)

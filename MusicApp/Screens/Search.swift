@@ -19,16 +19,21 @@ struct Search: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding(.horizontal)
                 ZStack {
-                    if (self.presentation == .List) {
-                        AlbumList(albums: viewModel.searchResult) { album in
-                            AlbumDetails(album)
+                    if (!self.viewModel.isSearching) {
+                        if (self.presentation == .List) {
+                            AlbumList(albums: viewModel.searchResult) { album in
+                                AlbumDetails(album)
+                            }
+                        } else {
+                            AlbumGrid(albums: viewModel.searchResult) { album in
+                                AlbumDetails(album)
+                            }
                         }
                     } else {
-                        AlbumGrid(albums: viewModel.searchResult) { album in
-                            AlbumDetails(album)
-                        }
+                        ActivityIndicator(.large)
                     }
                 }
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
             }
             .onAppear(perform: {
                 self.viewModel.startSearchListening()

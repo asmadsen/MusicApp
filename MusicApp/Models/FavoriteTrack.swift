@@ -32,14 +32,6 @@ extension FavoriteTrack {
         return request
     }
     
-    static func getBy(idTrack: String) -> NSFetchRequest<FavoriteTrack> {
-        let request = FavoriteTrack.fetchRequest() as! NSFetchRequest<FavoriteTrack>
-        
-        request.predicate = NSPredicate(format: "idTrack = %@", idTrack)
-        
-        return request
-    }
-    
     func from(track: Track) {
         self.createdAt = Date()
         self.idTrack = track.idTrack
